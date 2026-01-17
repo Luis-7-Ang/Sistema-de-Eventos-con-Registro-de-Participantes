@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participantes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="participantes.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Participantes del Evento</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registrar Participante</a>
+        <a class="active" href="participantes.html">Ver Participantes</a>
+    </nav>
+</header>
+
+<section class="evento-info">
+    <h2>Participantes Registrados</h2>
+
+    <div class="contadores">
+        <span id="totalAsistentes">Asistentes: 0</span>
+        <span id="totalPonentes">Ponentes: 0</span>
+    </div>
+</section>
+
+<section class="tabs">
+
+    <input type="radio" name="tab" id="tab1" checked>
+    <label for="tab1">Asistentes</label>
+
+    <input type="radio" name="tab" id="tab2">
+    <label for="tab2">Ponentes</label>
+
+    <input type="radio" name="tab" id="tab3">
+    <label for="tab3">Estadísticas</label>
+
+    <!-- ASISTENTES -->
+    <div class="contenido" id="asistentes">
+        <h3>Lista de Asistentes</h3>
+        <div class="lista" id="listaAsistentes"></div>
+    </div>
+
+    <!-- PONENTES -->
+    <div class="contenido" id="ponentes">
+        <h3>Lista de Ponentes</h3>
+        <div class="lista" id="listaPonentes"></div>
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="contenido" id="estadisticas">
+        <h3>Estadísticas</h3>
+        <p>Total de participantes registrados en el sistema.</p>
+    </div>
+
+</section>
+
+<!-- ✅ JAVASCRIPT -->
+<script>
+let participantes = JSON.parse(localStorage.getItem("participantes")) || [];
+
+const listaAsistentes = document.getElementById("listaAsistentes");
+const listaPonentes = document.getElementById("listaPonentes");
+
+const totalAsistentes = document.getElementById("totalAsistentes");
+const totalPonentes = document.getElementById("totalPonentes");
+
+function renderParticipantes() {
+    listaAsistentes.innerHTML = "";
+    listaPonentes.innerHTML = "";
+
+    let contAsistentes = 0;
+    let contPonentes = 0;
+
+    participantes.forEach((p, index) => {
+
+        // ASISTENTES
+        if (p.tipo === "Asistente") {
+            contAsistentes++;
+
+            const div = document.createElement("div");
+            div.classList.add("item");
+
+            div.innerHTML = `
+                <h4>${p.nombre}</h4>
+                <p>Email: ${p.correo}</p>
+                <p>Empresa: ${p.empresa || "No especificada"}</p>
+                <p>Nivel: ${p.nivel || "No definido"}</p>
+                <p class="fecha">Registrado: ${p.fechaRegistro}</p>
+                <button class="btn-eliminar" onclick="eliminarParticipante(${index})">
+                    Eliminar
+                </button>
+            `;
+
+            listaAsistentes.appendChild(div);
+        }
+
+        // PONENTES
+        if (p.tipo === "Ponente") {
+            contPonentes++;
+
+            const div = document.createElement("div");
+            div.classList.add("item", "ponente");
+
+            div.innerHTML = `
+                <h4>${p.nombre}</h4>
+                <p>Ponencia: ${p.titulo || "No especificado"}</p>
+                <p>Duración: ${p.duracion || "No especificado"}</p>
+                <p>Empresa: ${p.empresa || "No especificada"}</p>
+                <p>Bio: ${p.biografia || "No disponible"}</p>
+                <p class="fecha">Registrado: ${p.fechaRegistro}</p>
+                <button class="btn-eliminar" onclick="eliminarParticipante(${index})">
+                    Eliminar
+                </button>
+            `;
+
+            listaPonentes.appendChild(div);
+        }
+    });
+
+    totalAsistentes.textContent = "Asistentes: " + contAsistentes;
+    totalPonentes.textContent = "Ponentes: " + contPonentes;
+}
+
+// FUNCIÓN ELIMINAR
+function eliminarParticipante(index) {
+    if (confirm("¿Seguro que deseas eliminar este participante?")) {
+        participantes.splice(index, 1);
+        localStorage.setItem("participantes", JSON.stringify(participantes));
+        renderParticipantes();
+    }
+}
+
+// Cargar al inicio
+renderParticipantes();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f2f4f7;
+}
+
+header {
+    background: #1e2a47;
+    color: white;
+    padding: 15px;
+}
+
+nav a {
+    color: #ccc;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+nav .active {
+    color: white;
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    margin: 10px 0;
+}
+
+.btn {
+    background: #008000;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-cancel {
+    background: #b91c1c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}

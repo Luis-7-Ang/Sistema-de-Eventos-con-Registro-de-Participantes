@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Participantes</title>
+
+    <!-- Tus estilos -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="registro.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Registro de Participante</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a class="active" href="registro.html">Registrar Participante</a>
+        <a href="participantes.html">Ver Participantes</a>
+    </nav>
+</header>
+
+<section class="registro">
+
+<form id="formRegistro">
+
+    <label>Seleccionar Evento</label>
+    <select name="evento" required>
+        <option disabled selected value="">Selecciona un evento</option>
+        <option>Congreso de Tecnología 2025</option>
+        <option>Expo Salud 2025</option>
+        <option>Feria de Negocios</option>
+        <option>Encuentro de Innovación</option>
+    </select>
+
+    <h3>Tipo de Participante</h3>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="tipo" value="Asistente" checked>
+            Asistente
+        </label>
+        <label>
+            <input type="radio" name="tipo" value="Ponente">
+            Ponente
+        </label>
+    </div>
+
+    <h3>Datos Generales</h3>
+    <input type="text" name="nombre" placeholder="Nombre completo" required>
+    <input type="email" name="correo" placeholder="Correo" required>
+    <input type="tel" name="telefono" placeholder="Teléfono" required>
+    <input type="text" name="empresa" placeholder="Empresa / Institución">
+    <input type="text" name="pais" placeholder="País / Ciudad">
+
+    <h3>Datos de Asistente</h3>
+    <select name="nivel">
+        <option value="">Nivel de experiencia</option>
+        <option>Principiante</option>
+        <option>Intermedio</option>
+        <option>Avanzado</option>
+    </select>
+
+    <input type="text" name="intereses" placeholder="Áreas de interés">
+    <label>
+        <input type="checkbox" name="certificado">
+    </label>
+
+    <h3>Datos de Ponente</h3>
+    <input type="text" name="titulo" placeholder="Título de la ponencia">
+    <input type="text" name="duracion" placeholder="Duración estimada">
+    <input type="text" name="requerimientos" placeholder="Requerimientos técnicos">
+    <textarea name="biografia" placeholder="Biografía profesional"></textarea>
+
+
+    <button type="submit" class="btn">Registrar</button>
+    <a class="btn-cancel" href="index.html">Cancelar</a>
+
+</form>
+
+</section>
+
+<!-- ✅ JAVASCRIPT -->
+<script>
+document.getElementById("formRegistro").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const participante = {
+        evento: form.evento.value,
+        tipo: form.tipo.value,
+        nombre: form.nombre.value,
+        correo: form.correo.value,
+        telefono: form.telefono.value,
+        empresa: form.empresa.value,
+        pais: form.pais.value,
+        nivel: form.nivel.value,
+        intereses: form.intereses.value,
+        certificado: form.certificado.checked,
+        titulo: form.titulo.value,
+        duracion: form.duracion.value,
+        requerimientos: form.requerimientos.value,
+        biografia: form.biografia.value,
+        fechaRegistro: new Date().toLocaleString()
+    };
+
+    let participantes = JSON.parse(localStorage.getItem("participantes")) || [];
+
+    participantes.push(participante);
+    localStorage.setItem("participantes", JSON.stringify(participantes));
+
+    alert("✅ Participante registrado correctamente");
+    form.reset();
+});
+</script>
+
+</body>
+</html>

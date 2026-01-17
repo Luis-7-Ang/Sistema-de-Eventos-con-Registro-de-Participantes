@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Sistema</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="eventos.css">
+</head>
+
+<body>
+
+<header>
+    <h1 style="text-align:center;">Sistema de Eventos</h1>
+
+    <nav>
+        <a class="active" href="index.html">Inicio</a>
+        <a href="registro.html">Registrar Participante</a>
+        <a href="participantes.html">Ver Participantes</a>
+    </nav>
+</header>
+
+
+
+<section class="eventos">
+
+    <!-- EVENTO 1 -->
+    <div class="evento-card">
+        <h2>Congreso de Tecnología 2025</h2>
+        <p class="categoria">Tecnología</p>
+        <p><strong>Fecha:</strong> 15/02/2025 - 10:00 AM</p>
+        <p><strong>Lugar:</strong> CDMX</p>
+        <p class="descripcion">Un evento especializado en innovación y desarrollo tecnológico.</p>
+
+        <div class="stats">
+            <span id="tec-asistentes">Participantes: 0</span>
+            <span id="tec-ponentes">Ponentes: 0</span>
+        </div>
+
+        <div class="acciones">
+           <p> </p>
+
+            <a href="participantes.html">Ver Detalles</a>
+            <a href="registro.html">Registrar Participante</a>
+            <a href="participantes.html">Ver Participantes</a>
+        </div>
+    </div>
+
+    <!-- EVENTO 2 -->
+    <div class="evento-card">
+        <h2>Expo Salud 2025</h2>
+        <p class="categoria">Salud</p>
+        <p><strong>Fecha:</strong> 22/03/2025 - 9:00 AM</p>
+        <p><strong>Lugar:</strong> Monterrey</p>
+        <p class="descripcion">Conferencia enfocada en tendencias de medicina moderna.</p>
+
+        <div class="stats">
+            <span id="salud-asistentes">Participantes: 0</span>
+            <span id="salud-ponentes">Ponentes: 0</span>
+        </div>
+
+        <div class="acciones">
+            <p> </p>
+            <a href="participantes.html">Ver Detalles</a>
+            <a href="registro.html">Registrar Participante</a>
+            <a href="participantes.html">Ver Participantes</a>
+        </div>
+    </div>
+
+    <!-- EVENTO 3 -->
+    <div class="evento-card">
+        <h2>Feria de Negocios</h2>
+        <p class="categoria">Negocios</p>
+        <p><strong>Fecha:</strong> 10/04/2025 - 11:00 AM</p>
+        <p><strong>Lugar:</strong> Guadalajara</p>
+        <p class="descripcion">Eventos y talleres para emprendedores y empresas internacionales.</p>
+
+        <div class="stats">
+            <span id="negocios-asistentes">Participantes: 0</span>
+            <span id="negocios-ponentes">Ponentes: 0</span>
+        </div>
+
+        <div class="acciones">
+            <p> </p>
+            <a href="participantes.html">Ver Detalles</a>
+            <a href="registro.html">Registrar Participante</a>
+            <a href="participantes.html">Ver Participantes</a>
+        </div>
+    </div>
+
+    <!-- EVENTO 4 -->
+    <div class="evento-card">
+        <h2>Encuentro de Innovación</h2>
+        <p class="categoria">Tecnología</p>
+        <p><strong>Fecha:</strong> 04/05/2025 - 12:00 PM</p>
+        <p><strong>Lugar:</strong> Puebla</p>
+        <p class="descripcion">Reunión de expertos en innovación y procesos creativos.</p>
+
+        <div class="stats">
+            <span id="innovacion-asistentes">Participantes: 0</span>
+            <span id="innovacion-ponentes">Ponentes: 0</span>
+        </div>
+
+        <div class="acciones">
+              <p> </p>
+            <a href="participantes.html">Ver Detalles</a>
+            <a href="registro.html">Registrar Participante</a>
+            <a href="participantes.html">Ver Participantes</a>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2025 Sistema de Eventos BY: BRY</p>
+</footer>
+
+<!-- ✅ JAVASCRIPT FUNCIONAL -->
+<script>
+const participantes = JSON.parse(localStorage.getItem("participantes")) || [];
+
+const conteo = {
+    "Congreso de Tecnología 2025": { asistentes: 0, ponentes: 0 },
+    "Expo Salud 2025": { asistentes: 0, ponentes: 0 },
+    "Feria de Negocios": { asistentes: 0, ponentes: 0 },
+    "Encuentro de Innovación": { asistentes: 0, ponentes: 0 }
+};
+
+participantes.forEach(p => {
+    if (conteo[p.evento]) {
+        if (p.tipo === "Asistente") conteo[p.evento].asistentes++;
+        if (p.tipo === "Ponente") conteo[p.evento].ponentes++;
+    }
+});
+
+document.getElementById("tec-asistentes").textContent =
+    "Participantes: " + conteo["Congreso de Tecnología 2025"].asistentes;
+document.getElementById("tec-ponentes").textContent =
+    "Ponentes: " + conteo["Congreso de Tecnología 2025"].ponentes;
+
+document.getElementById("salud-asistentes").textContent =
+    "Participantes: " + conteo["Expo Salud 2025"].asistentes;
+document.getElementById("salud-ponentes").textContent =
+    "Ponentes: " + conteo["Expo Salud 2025"].ponentes;
+
+document.getElementById("negocios-asistentes").textContent =
+    "Participantes: " + conteo["Feria de Negocios"].asistentes;
+document.getElementById("negocios-ponentes").textContent =
+    "Ponentes: " + conteo["Feria de Negocios"].ponentes;
+
+document.getElementById("innovacion-asistentes").textContent =
+    "Participantes: " + conteo["Encuentro de Innovación"].asistentes;
+document.getElementById("innovacion-ponentes").textContent =
+    "Ponentes: " + conteo["Encuentro de Innovación"].ponentes;
+</script>
+
+</body>
+</html>

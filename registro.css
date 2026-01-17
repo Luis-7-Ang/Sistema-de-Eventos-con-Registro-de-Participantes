@@ -1,0 +1,20 @@
+.registro {
+    padding: 20px;
+}
+
+form {
+    background: #FF8C00;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
